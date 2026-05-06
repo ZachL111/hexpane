@@ -58,3 +58,13 @@ foreach ($pathPattern in $knownPaths) {
 zig test src/main.zig
 
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-hexpane-detail.ps1
+
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-hexpane-properties.ps1
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-hexpane-golden.ps1
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

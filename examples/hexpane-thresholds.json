@@ -1,0 +1,17 @@
+{
+  "repo": "hexpane",
+  "thresholds": {
+    "signal": 4,
+    "slack": 1,
+    "confidence": 2,
+    "drag": 4,
+    "ship": 180,
+    "watch": 103
+  },
+  "terms": [
+    "file span",
+    "terminal width",
+    "argument risk",
+    "report density"
+  ]
+}

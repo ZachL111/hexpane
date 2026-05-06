@@ -1,0 +1,28 @@
+{
+  "repo": "hexpane",
+  "language": "Zig",
+  "category": "CLI tools",
+  "goal": "Render byte ranges with offsets, ASCII gutters, and stable hex fixtures.",
+  "weights": {
+    "signal": 4,
+    "slack": 1,
+    "confidence": 2,
+    "drag": 4
+  },
+  "thresholds": {
+    "ship": 180,
+    "watch": 103
+  },
+  "properties": [
+    "raising signal cannot reduce score",
+    "raising drag cannot improve score",
+    "lane labels must match configured thresholds",
+    "golden fixture ids must remain unique"
+  ],
+  "fixture_files": [
+    "fixtures/golden/scoreboard.csv",
+    "fixtures/golden/lane-matrix.csv",
+    "fixtures/fuzz/mutations.csv",
+    "fixtures/fuzz/boundary-cases.jsonl"
+  ]
+}
