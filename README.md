@@ -1,67 +1,40 @@
 # hexpane
 
-`hexpane` treats cli tools as a local verification problem. The Zig implementation is intentionally narrow, but the fixtures and notes make the behavior explicit.
+`hexpane` explores cli tools with a small Zig codebase and local fixtures. The technical goal is to render byte ranges with offsets, ASCII gutters, and stable hex fixtures.
 
-## Hexpane Checkpoints
+## Project Rationale
 
-Treat the compact fixture as the contract and the extended examples as a scratchpad. The code should stay boring enough that a change in behavior is obvious from the test output.
+The point is to make a small domain rule concrete enough that a reader can change it and immediately see what broke.
 
-## What This Is For
+## Hexpane Review Notes
 
-This project keeps the domain idea close to the tests. That makes it useful as a reference implementation, a small experiment, or a starting point for a more specialized tool.
+Start with `file span` and `argument risk`. Those cases create the widest score spread in this repo, so they are the best quick check when the model changes.
 
-## Case Study
+## Feature Set
 
-The examples are meant to be readable before they are exhaustive. They cover enough variation to show how latency and risk can pull a decision below the threshold.
+- `fixtures/domain_review.csv` adds cases for file span and terminal width.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/hexpane-walkthrough.md` walks through the case spread.
+- The Zig code includes a review path for `file span` and `argument risk`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
-## Architecture Notes
+## Architecture
 
-The core is a scoring model over demand, capacity, latency, risk, and weight. That keeps terminal output, argument shape, and file input in one explicit decision path. The threshold is 175, with risk penalty 6, latency penalty 3, and weight bonus 2. The Zig version uses compile-time constants and native test blocks for fast local checks.
+The implementation keeps the scoring rule plain: reward signal and confidence, preserve slack, penalize drag, then classify the result into a review lane.
 
-## Useful Pieces
+The Zig code keeps the review rule close to the tests.
 
-- Models terminal output with deterministic scoring and explicit review decisions.
-- Uses fixture data to keep argument shape changes visible in code review.
-- Includes extended examples for file input, including `recovery` and `degraded`.
-- Documents repeatable reports tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
-
-## Local Workflow
+## Usage
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
+## Test Command
 
-## Quality Gate
+The check exercises the source code and the review fixture. `stale` is the high score at 210; `edge` is the low score at 151.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
+## Next Improvements
 
-The audit command checks repository structure and README constraints before it delegates to the verifier.
-
-## Project Layout
-
-- `src`: primary implementation
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
-
-## Expansion Ideas
-
-- Add a loader for `examples/extended_cases.csv` and promote selected cases into the language test suite.
-- Add a short report command that prints the score breakdown for a single scenario.
-- Add malformed input fixtures so the failure path is as visible as the happy path.
-- Add one more cli tools fixture that focuses on a malformed or borderline input.
-
-## Scope
-
-The scoring model is simple by design. More domain-specific behavior should be added through explicit adapters or extra fixture classes rather than hidden constants.
-
-## Tooling
-
-Clone the repository, enter the directory, and run the verifier. No database server, cloud account, or token is required.
+The repository is intentionally scoped to local checks. I would expand it by adding adversarial fixtures before adding features.

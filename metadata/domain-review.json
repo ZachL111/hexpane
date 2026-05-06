@@ -1,0 +1,73 @@
+{
+  "repo": "hexpane",
+  "language": "Zig",
+  "category": "CLI tools",
+  "goal": "Render byte ranges with offsets, ASCII gutters, and stable hex fixtures.",
+  "review_model": {
+    "terms": [
+      "file span",
+      "terminal width",
+      "argument risk",
+      "report density"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "file span",
+      "signal": 69,
+      "slack": 22,
+      "drag": 10,
+      "confidence": 46,
+      "score": 176,
+      "lane": "ship"
+    },
+    {
+      "name": "stress",
+      "focus": "terminal width",
+      "signal": 67,
+      "slack": 50,
+      "drag": 11,
+      "confidence": 45,
+      "score": 196,
+      "lane": "ship"
+    },
+    {
+      "name": "edge",
+      "focus": "argument risk",
+      "signal": 64,
+      "slack": 26,
+      "drag": 20,
+      "confidence": 57,
+      "score": 151,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "report density",
+      "signal": 71,
+      "slack": 20,
+      "drag": 8,
+      "confidence": 48,
+      "score": 186,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "file span",
+      "signal": 85,
+      "slack": 37,
+      "drag": 14,
+      "confidence": 45,
+      "score": 210,
+      "lane": "ship"
+    }
+  ]
+}
