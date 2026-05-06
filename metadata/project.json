@@ -1,0 +1,32 @@
+{
+  "index": 9,
+  "phase": 1,
+  "batch": 1,
+  "name": "hexpane",
+  "planned_name": "hexpane",
+  "language": "Zig",
+  "category": "CLI tools",
+  "goal": "Render byte ranges with offsets, ASCII gutters, and stable hex fixtures.",
+  "repository_url": "https://github.com/ZachL111/hexpane",
+  "verification_command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+  "model": {
+    "inputs": [
+      "demand",
+      "capacity",
+      "latency",
+      "risk",
+      "weight"
+    ],
+    "threshold": 175,
+    "risk_penalty": 6,
+    "latency_penalty": 3,
+    "weight_bonus": 2,
+    "decision_rule": "accept when score is greater than or equal to threshold, otherwise review"
+  },
+  "quality_gates": [
+    "readme constraint scan",
+    "fixture presence check",
+    "metadata JSON parse",
+    "language verifier"
+  ]
+}
